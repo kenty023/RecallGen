@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="style/quiz.css">
+    <link rel="icon" type="image/x-icon" href="image/logo2.png">
+    <title>RecallGen | Quiz</title>
+</head>
+<body>
+<div class="glass-container">
+
+    <!-- BURGER-->
+    <button class="burger-btn" id="burgerBtn">
+        <span></span><span></span><span></span>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+        <div class="brand">
+            <img src="image/logo.png" alt="Logo" onerror="this.style.display='none'">
+            <h2>RecallGen</h2>
+        </div>
+        <nav>
+            <a href="dashboard.html" class="nav-item"><i class="fas fa-home"></i> Dashboard</a>
+            <a href="quiz.html"class="nav-item active"><i class="fas fa-brain"></i> Take Quiz</a>
+            <a href="results.html"class="nav-item"><i class="fas fa-chart-line"></i> My Results</a>
+            <a href="modules.html"class="nav-item"><i class="fas fa-folder"></i> My Modules</a>
+            <a href="settings.html"  class="nav-item"><i class="fas fa-cog"></i> Settings</a>
+        </nav>
+        <button class="logout-link" id="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main-content">
+        <div class="top-nav">
+            <div class="welcome-section">
+                <h1>Take a Quiz</h1>
+                <p>AI-generated questions from your uploaded modules</p>
+            </div>
+            <div class="profile-preview">
+                <img id="nav-pfp" src="image/default-pfp.png" alt="pfp">
+                <span id="display-username">Explorer</span>
+            </div>
+        </div>
+
+        <!-- STEPS -->
+        <div class="steps">
+            <div class="step active" id="step1"><div class="step-num">1</div>Pick Module</div>
+            <div class="step-line" id="line1"></div>
+            <div class="step" id="step2"><div class="step-num">2</div>Configure</div>
+            <div class="step-line" id="line2"></div>
+            <div class="step" id="step3"><div class="step-num">3</div>Quiz Time</div>
+        </div>
+
+        <!-- SCREEN 1: MODULE PICKER -->
+        <div class="screen active" id="screen-modules">
+            <div class="quiz-card">
+                <h2><i class="fas fa-folder-open"></i> Select a Module</h2>
+                <div id="modules-container" class="state-center">
+                    <div class="spinner"></div>
+                    <p>Loading your modules...</p>
+                </div>
+            </div>
+            <div class="btn-row">
+                <div></div>
+                <button class="btn-main" id="btn-to-setup" disabled>
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SCREEN 2: SETUP -->
+        <div class="screen" id="screen-setup">
+            <div class="quiz-card">
+                <h2><i class="fas fa-sliders-h"></i> Configure Your Quiz</h2>
+                <div class="setup-group">
+                    <label>Quiz Type</label>
+                    <div class="type-grid">
+                        <div class="type-card selected" data-type="multiple">
+                            <i class="fas fa-list-ul"></i><span>Multiple Choice</span>
+                        </div>
+                        <div class="type-card" data-type="truefalse">
+                            <i class="fas fa-check-circle"></i><span>True / False</span>
+                        </div>
+                        <div class="type-card" data-type="fillblank">
+                            <i class="fas fa-pencil-alt"></i><span>Identification</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="setup-group">
+                    <label>Number of Questions: <span id="q-label" style="color:var(--primary-teal);font-weight:600;">10</span></label>
+                    <div class="slider-row">
+                        <span>1</span>
+                        <input type="range" id="q-slider" min="1" max="50" value="10" step="1">
+                        <span>50</span>
+                        <div class="q-badge" id="q-badge">10</div>
+                    </div>
+                </div>
+                <div class="selected-mod-bar">
+                    <i class="fas fa-file-alt"></i>
+                    <div>
+                        <div class="lbl">Selected module</div>
+                        <div class="val" id="selected-mod-name">—</div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-row">
+                <button class="btn-ghost" id="btn-back"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn-main" id="btn-generate">
+                    <i class="fas fa-magic"></i> Generate Questions
+                </button>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: GENERATING -->
+        <div class="screen" id="screen-generating">
+            <div class="quiz-card">
+                <div class="gen-wrap">
+                    <div class="gen-spinner"></div>
+                    <div class="gen-title">Generating your quiz...</div>
+                    <div class="gen-sub">This usually takes 10–20 seconds</div>
+                    <div class="gen-steps">
+                        <div class="gen-step" id="gs1"><i class="fas fa-cloud-download-alt"></i> Fetching module from Supabase</div>
+                        <div class="gen-step" id="gs2"><i class="fas fa-upload"></i> Sending to quiz server</div>
+                        <div class="gen-step" id="gs3"><i class="fas fa-question-circle"></i> Generating questions</div>
+                        <div class="gen-step" id="gs4"><i class="fas fa-check-circle"></i> Preparing your quiz</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 4: QUIZ -->
+        <div class="screen" id="screen-quiz">
+            <div class="quiz-header">
+                <div class="q-meta">
+                    <div class="q-counter">Question <span id="cur-q">1</span> of <span id="tot-q">10</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="prog-fill" style="width:10%"></div>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <!-- TTS TOGGLE BUTTON -->
+                    <button id="tts-btn" title="Mute TTS" style="
+                        background: rgba(45,90,83,0.1);
+                        border: none;
+                        border-radius: 10px;
+                        width: 36px;
+                        height: 36px;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: var(--primary-teal);
+                        font-size: 1rem;
+                        transition: all 0.3s ease;
+                    ">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <div class="type-pill" id="type-pill">Multiple Choice</div>
+                </div>
+            </div>
+            <div class="q-card">
+                <div class="q-text" id="q-text">Loading...</div>
+                <div id="answers-wrap"></div>
+                <div class="quiz-actions">
+                    <div class="feedback" id="feedback"></div>
+                    <div style="display:flex;gap:10px;margin-left:auto;">
+                        <button class="btn-main" id="btn-submit" disabled>Submit</button>
+                        <button class="btn-main" id="btn-next" style="display:none;">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 5: RESULTS -->
+        <div class="screen" id="screen-results">
+            <div class="results-center">
+                <div class="results-card">
+                    <div class="score-ring">
+                        <div class="score-pct" id="res-pct">0%</div>
+                        <div class="score-lbl">Score</div>
+                    </div>
+                    <h2 id="res-title">Quiz Complete!</h2>
+                    <p id="res-sub">Here's how you did</p>
+                    <div class="stats-row">
+                        <div class="stat"><div class="stat-n" id="res-correct">0</div><div class="stat-l">Correct</div></div>
+                        <div class="stat"><div class="stat-n" id="res-wrong">0</div><div class="stat-l">Wrong</div></div>
+                        <div class="stat"><div class="stat-n" id="res-total">0</div><div class="stat-l">Total</div></div>
+                    </div>
+                    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+                        <button class="btn-ghost" id="btn-new"><i class="fas fa-plus"></i> New Quiz</button>
+                        <button class="btn-main"  id="btn-retry"><i class="fas fa-redo"></i> Try Again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="module" src="script/quiz.js"></script>
+</body>
+</html>

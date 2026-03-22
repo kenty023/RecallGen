@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style/dashboard.css">
+    <link rel="icon" type="image/x-icon" href="image/logo2.png">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>RecallGen | Dashboard</title>
+</head>
+<body id="app-body">
+
+    <div class="glass-container">
+
+        <!-- BURGER BUTTON -->
+        <button class="burger-btn" id="burgerBtn">
+            <span></span><span></span><span></span>
+        </button>
+
+        <!-- OVERLAY -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="brand">
+                <img src="image/logo.png" alt="RecallGen">
+                <h2>RecallGen</h2>
+            </div>
+            <nav>
+                <a href="dashboard.html"class="nav-item active"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+                <a href="quiz.html"class="nav-item"><i class="fas fa-book"></i> <span>Quiz</span></a>
+                <a href="analytics.html"class="nav-item"><i class="fas fa-chart-line"></i> <span>Analytics</span></a>
+                <a href="settings.html"class="nav-item"><i class="fas fa-cog"></i> <span>Settings</span></a>
+            </nav>
+            <button id="logout-btn" class="logout-link">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <header class="top-nav">
+                <div class="welcome-section">
+                    <h1>Welcome, <span id="display-username">Explorer</span>! 👋</h1>
+                    <p>Ready to turn your files into knowledge?</p>
+                </div>
+                <div class="profile-preview">
+                    <img src="image/default-pfp.png" id="nav-pfp" alt="Profile">
+                </div>
+            </header>
+
+            <section class="content-grid">
+                <div class="upload-card">
+                    <div class="drop-zone" id="drop-zone">
+                        <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                        <h3>Upload Study Material</h3>
+                        <p>PDF File (Max 200MB)</p>
+                        <input type="file" id="file-input" accept=".pdf, .png, .jpg" hidden>
+                        <button class="btn-browse" onclick="document.getElementById('file-input').click()">
+                            Browse Files
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <script type="module" src="script/dashboard.js"></script>
+
+</body>
+</html>

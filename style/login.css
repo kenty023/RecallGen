@@ -1,0 +1,167 @@
+* 
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body 
+{
+    background-color: #f0f2f5;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.swal2-container 
+{
+    z-index: 999999 !important;
+}
+
+.swal2-popup 
+{
+    border-radius: 15px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.swal2-confirm 
+{
+    background-color: #2D5A53 !important;
+    border-color: #2D5A53 !important;
+}
+
+.swal2-confirm:hover 
+{
+    background-color: #1f3f3b !important;
+}
+
+.auth-wrapper 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.auth-container 
+{
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.auth-logo 
+{
+    width: 80px;
+    margin-bottom: 20px;
+}
+
+.auth-container h2 
+{
+    color: #2D5A53;
+    margin-bottom: 8px;
+    font-size: 1.8rem;
+}
+
+.auth-container p 
+{
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+#login-form, #register-form 
+{
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn 
+{
+    from 
+    { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    to 
+    { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.input-group 
+{
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group input 
+{
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus
+{
+    border-color: #2D5A53;
+    box-shadow: 0 0 5px rgba(45, 90, 83, 0.2);
+    background-color: #f9fbfb;
+}
+
+.button-group 
+{
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.btn-primary 
+{
+    flex: 2;
+    background-color: #2D5A53;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover 
+{
+    background-color: #1f3f3b;
+}
+
+.btn-secondary 
+{
+    flex: 1;
+    background-color: white;
+    color: #2D5A53;
+    border: 1px solid #2D5A53;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover 
+{
+    background-color: #f0fdfa;
+}
