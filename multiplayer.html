@@ -1,0 +1,208 @@
+
+<div class="screen active" id="screen-mode">
+    <div class="mode-pick-wrap">
+        <div class="mode-card solo-card" id="btn-solo">
+            <div class="mode-card-icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="mode-card-text">
+                <h3>Solo Quiz</h3>
+                <p>Study at your own pace. Generate questions from your uploaded modules and track your progress.</p>
+            </div>
+            <div class="mode-card-arrow"><i class="fas fa-arrow-right"></i></div>
+        </div>
+
+        <div class="mode-card multi-card" id="btn-multi">
+            <div class="mode-card-icon multi-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="mode-card-text">
+                <h3>Multiplayer <span class="live-badge">LIVE</span></h3>
+                <p>Quiz with friends in real-time. Host a room, share the code, and compete on the leaderboard.</p>
+            </div>
+            <div class="mode-card-arrow"><i class="fas fa-arrow-right"></i></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="screen" id="screen-mp-gate">
+    <div class="quiz-card mp-gate-card">
+        <button class="mp-back-btn" id="mp-gate-back">
+            <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <h2><i class="fas fa-users"></i> Multiplayer Quiz</h2>
+        <p class="mp-sub">Host a new room or join an existing one using a room code.</p>
+
+        <div class="mp-gate-grid">
+            <div class="mp-gate-opt" id="mp-opt-host">
+                <div class="mp-gate-icon"><i class="fas fa-crown"></i></div>
+                <div class="mp-gate-label">Create Room</div>
+                <div class="mp-gate-desc">Generate a quiz and share the room code with friends</div>
+            </div>
+            <div class="mp-gate-opt" id="mp-opt-join">
+                <div class="mp-gate-icon join-icon"><i class="fas fa-door-open"></i></div>
+                <div class="mp-gate-label">Join Room</div>
+                <div class="mp-gate-desc">Enter a room code to join a friend's quiz session</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- SCREEN MP-B: JOIN WITH CODE -->
+<div class="screen" id="screen-mp-join">
+    <div class="quiz-card">
+        <button class="mp-back-btn" id="mp-join-back">
+            <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <h2><i class="fas fa-door-open"></i> Join a Room</h2>
+
+        <div class="mp-join-form">
+            <div class="mp-field">
+                <label>Your display name</label>
+                <input type="text" id="join-display-name" class="mp-input" placeholder="e.g. Maria" maxlength="20"/>
+            </div>
+            <div class="mp-field">
+                <label>Room code</label>
+                <input type="text" id="join-room-code" class="mp-input code-input" placeholder="e.g. ABC123" maxlength="6"/>
+            </div>
+            <div id="join-error" class="mp-error" style="display:none;"></div>
+            <button class="btn-main mp-wide-btn" id="btn-do-join">
+                <i class="fas fa-sign-in-alt"></i> Join Room
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- SCREEN MP-C: LOBBY (host + joined players see this) -->
+<div class="screen" id="screen-mp-lobby">
+    <div class="quiz-card lobby-card">
+
+        <!-- HOST VIEW -->
+        <div id="lobby-host-view">
+            <h2><i class="fas fa-crown"></i> You're the Host</h2>
+            <p class="mp-sub">Share this code with friends. Start when everyone is ready.</p>
+
+            <div class="room-code-box">
+                <div class="room-code-label">Room Code</div>
+                <div class="room-code-val" id="lobby-code-display">——</div>
+                <button class="copy-code-btn" id="btn-copy-code">
+                    <i class="fas fa-copy"></i> Copy Code
+                </button>
+            </div>
+
+            <!-- Module picker inline for host -->
+            <div class="lobby-module-section" id="lobby-module-section">
+                <div class="lobby-section-title"><i class="fas fa-folder"></i> Select a module to quiz</div>
+                <div id="lobby-modules-container" class="state-center">
+                    <div class="spinner"></div>
+                    <p>Loading modules...</p>
+                </div>
+            </div>
+
+            <!-- Config row -->
+            <div class="lobby-config" id="lobby-config" style="display:none;">
+                <div class="lobby-cfg-row">
+                    <div class="lobby-cfg-item">
+                        <label>Quiz Type</label>
+                        <select class="mp-select" id="lobby-type">
+                            <option value="multiple">Multiple Choice</option>
+                            <option value="truefalse">True / False</option>
+                            <option value="fillblank">Identification</option>
+                        </select>
+                    </div>
+                    <div class="lobby-cfg-item">
+                        <label>No. of Questions</label>
+                        <select class="mp-select" id="lobby-qcount">
+                            <option value="5">5</option>
+                            <option value="10" selected>10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GUEST VIEW -->
+        <div id="lobby-guest-view" style="display:none;">
+            <h2><i class="fas fa-hourglass-half"></i> Waiting for host...</h2>
+            <p class="mp-sub" id="lobby-guest-sub">The host will start the quiz soon.</p>
+            <div class="room-code-box guest-code-box">
+                <div class="room-code-label">Room Code</div>
+                <div class="room-code-val" id="lobby-code-guest">——</div>
+            </div>
+        </div>
+
+        <!-- Shared: player list -->
+        <div class="players-section">
+            <div class="players-header">
+                <span class="players-section-title"><i class="fas fa-circle" style="color:#2ed573;font-size:0.6rem;"></i> Players in room</span>
+                <span class="players-count" id="players-count">0</span>
+            </div>
+            <div class="players-chips" id="players-chips"></div>
+        </div>
+
+        <!-- Host start button -->
+        <div id="lobby-host-actions" style="display:none; margin-top:20px;">
+            <button class="btn-main mp-wide-btn" id="btn-start-mp" disabled>
+                <i class="fas fa-play"></i> Start Quiz
+            </button>
+            <div class="mp-start-hint" id="mp-start-hint">Select a module to enable start</div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- SCREEN MP-D: MULTIPLAYER QUIZ (reuses quiz screen style) -->
+<div class="screen" id="screen-mp-quiz">
+    <div class="quiz-header">
+        <div class="q-meta">
+            <div class="q-counter">Question <span id="mp-cur-q">1</span> of <span id="mp-tot-q">10</span></div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="mp-prog-fill" style="width:10%"></div>
+            </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+            <div class="mp-timer-pill" id="mp-timer">20</div>
+            <div class="mp-score-pill">Score: <span id="mp-live-score">0</span></div>
+        </div>
+    </div>
+    <div class="q-card">
+        <div class="q-text" id="mp-q-text">Loading...</div>
+        <div id="mp-answers-wrap"></div>
+        <div class="quiz-actions">
+            <div class="feedback" id="mp-feedback"></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- SCREEN MP-E: MULTIPLAYER RESULTS / LEADERBOARD -->
+<div class="screen" id="screen-mp-results">
+    <div class="results-center">
+        <div class="results-card mp-results-card">
+            <div class="score-ring">
+                <div class="score-pct" id="mp-res-pct">0%</div>
+                <div class="score-lbl">Your Score</div>
+            </div>
+            <h2 id="mp-res-title">Quiz Complete!</h2>
+
+            <div class="mp-leaderboard">
+                <div class="mp-lb-title"><i class="fas fa-trophy"></i> Leaderboard</div>
+                <div id="mp-lb-rows"></div>
+                <div class="mp-lb-updating" id="mp-lb-updating">
+                    <div class="spinner" style="width:20px;height:20px;border-width:2px;"></div>
+                    Waiting for others to finish...
+                </div>
+            </div>
+
+            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px;">
+                <button class="btn-ghost" id="mp-btn-home"><i class="fas fa-home"></i> Home</button>
+            </div>
+        </div>
+    </div>
+</div>

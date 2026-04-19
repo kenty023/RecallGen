@@ -1,0 +1,126 @@
+* 
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body 
+{
+    background-color: #f4f4f4;
+    overflow: hidden; 
+}
+
+#loading-screen
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(circle, #2D5A53 0%, #2D5A53 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease;
+}
+
+.loader-content 
+{
+    text-align: center;
+    color: white;
+}
+
+.logo-bounce 
+{
+    width: 180px; 
+    margin-bottom: 20px;
+    filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.3));
+    animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce 
+{
+    0%, 100% 
+    { 
+        transform: translateY(0);
+    }
+    50% 
+    { 
+        transform: translateY(-25px); 
+    }
+}
+
+#loading-text 
+{
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    opacity: 0.8;
+}
+
+#continue-btn 
+{
+    display: none;
+    margin-top: 20px;
+    padding: 15px 40px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2D5A53;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+#continue-btn:hover 
+{
+    transform: scale(1.05);
+    background-color: #e0e0e0;
+}
+
+#main-content 
+{
+    display: none; 
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f2f5;
+}
+
+.auth-container 
+{
+    text-align: center;
+    padding: 40px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.placeholder-form 
+{
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-login, .btn-register 
+{
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-login 
+{ 
+    background: #2D5A53; color: white; 
+}
+.btn-register 
+{ 
+    background: #ccc; 
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/login.css">
+    <link rel="icon" type="image/x-icon" href="image/logo2.png">
+    <script src="https://unpkg.com/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <title>RecallGen | Register</title>
+    
+</head>
+<body>
+
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <img src="image/logo.png" alt="RecallGen Logo" class="auth-logo">
+            <h2>Create Account</h2>
+            <p>Join us and start creating reviewers!</p>
+            
+            <form id="register-form">
+                <div class="input-group">
+                    <input type="text" id="reg-username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="reg-email" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <input type="tel" id="reg-contact" placeholder="Contact Number" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="reg-password" placeholder="Password" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="reg-confirm-password" placeholder="Re-type Password" required>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="btn-primary">Create Account</button>
+                    <button type="button" class="btn-secondary" onclick="location.href='index.html'">Back to Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script type="module" src="script/loginscript.js"></script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style/settings.css">
+    <!--  DARK MODE  -->
+    <link rel="stylesheet" href="style/darkmode.css">
+    <link rel="icon" type="image/x-icon" href="image/logo2.png">
+    <!-- DARK MODE SCRIPT  -->
+    <script src="script/darkmode.js"></script>
+    <!-- PROFILE DROPDOWN -->
+    <link rel="stylesheet" href="style/profiledropdown.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>RecallGen | Settings</title>
+</head>
+<body id="app-body">
+
+    <div class="glass-container">
+
+        <!-- BURGER BUTTON -->
+        <button class="burger-btn" id="burgerBtn">
+            <span></span><span></span><span></span>
+        </button>
+
+        <!-- OVERLAY -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="brand">
+                <img src="image/logo.png" alt="RecallGen">
+                <h2>RecallGen</h2>
+            </div>
+            <nav>
+                <a href="dashboard.html" class="nav-item"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+                <a href="quiz.html" class="nav-item"><i class="fas fa-brain"></i> <span>Create Quiz</span></a>
+                <a href="analytics.html" class="nav-item"><i class="fas fa-chart-bar"></i> <span>Analytics</span></a>
+                <a href="settings.html" class="nav-item active"><i class="fas fa-cog"></i> <span>Settings</span></a>
+            </nav>
+            <button id="logout-btn" class="logout-link">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <header class="top-nav">
+                <div class="welcome-section">
+                    <h1>Settings</h1>
+                    <p>Manage your profile and preferences</p>
+                </div>
+                <div class="profile-preview">
+                    <img src="image/default-pfp.png" id="nav-pfp" alt="Profile">
+                    <span id="display-username" style="display:none;"></span>
+                </div>
+            </header>
+
+            <!-- SUB-MENU TABS -->
+            <div class="settings-tabs">
+                <button class="settings-tab-btn active" data-tab="appearance">
+                    <i class="fas fa-paint-brush"></i> Appearance
+                </button>
+                <button class="settings-tab-btn" data-tab="account">
+                    <i class="fas fa-user-cog"></i> Account
+                </button>
+            </div>
+
+            <!-- PANEL: APPEARANCE -->
+            <div class="settings-panel active" id="panel-appearance">
+                <div class="settings-grid">
+
+                    <!-- CARD 1: Profile Picture -->
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-user-circle"></i></div>
+                            <div>
+                                <h3>Profile Picture</h3>
+                                <p>Update your avatar</p>
+                            </div>
+                        </div>
+                        <div class="pfp-section">
+                            <div class="pfp-wrapper">
+                                <img src="image/default-pfp.png" id="settings-pfp" alt="Profile">
+                                <label for="pfp-upload" class="pfp-edit-btn">
+                                    <i class="fas fa-camera"></i>
+                                </label>
+                                <input type="file" id="pfp-upload" accept="image/*" hidden>
+                            </div>
+                            <div class="pfp-info">
+                                <span id="pfp-filename">No file chosen</span>
+                                <small>JPG, PNG or GIF — max 5MB</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2: Theme Color -->
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-palette"></i></div>
+                            <div>
+                                <h3>Theme Color</h3>
+                                <p>Pick your accent color</p>
+                            </div>
+                        </div>
+                        <div class="color-section">
+                            <div class="color-presets">
+                                <button class="preset-swatch" data-color="#2D5A53" style="background:#2D5A53;" title="Forest"></button>
+                                <button class="preset-swatch" data-color="#1a4a7a" style="background:#1a4a7a;" title="Ocean"></button>
+                                <button class="preset-swatch" data-color="#6b3fa0" style="background:#6b3fa0;" title="Violet"></button>
+                                <button class="preset-swatch" data-color="#c0392b" style="background:#c0392b;" title="Ruby"></button>
+                                <button class="preset-swatch" data-color="#b7610a" style="background:#b7610a;" title="Amber"></button>
+                                <button class="preset-swatch" data-color="#1a6b4a" style="background:#1a6b4a;" title="Emerald"></button>
+                            </div>
+                            <div class="color-custom">
+                                <label>Custom color</label>
+                                <div class="color-input-row">
+                                    <input type="color" id="theme-color" value="#2D5A53">
+                                    <span id="color-hex">#2D5A53</span>
+                                </div>
+                            </div>
+                            <div class="color-preview-bar" id="color-preview-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- ✨ CARD 3: Dark Mode Toggle -->
+                    <div class="settings-card dark-mode-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-moon"></i></div>
+                            <div>
+                                <h3>Dark Mode</h3>
+                                <p>Switch between light and dark</p>
+                            </div>
+                        </div>
+                        <div class="toggle-row">
+                            <div class="toggle-info">
+                                <span id="dark-mode-label">Light Mode</span>
+                                <small>Applied across all pages</small>
+                            </div>
+                            <label class="theme-switch">
+                                <input type="checkbox" id="dark-mode-toggle">
+                                <div class="slider">
+                                    <i class="fas fa-sun icon-sun"></i>
+                                    <i class="fas fa-moon icon-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- CARD 4: Background Theme (full width) -->
+                    <div class="settings-card" style="grid-column: 1 / -1;">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-image"></i></div>
+                            <div>
+                                <h3>Background Theme</h3>
+                                <p>Set a custom wallpaper</p>
+                            </div>
+                        </div>
+                        <div class="bg-section">
+                            <div class="bg-preview" id="bg-preview">
+                                <i class="fas fa-mountain"></i>
+                                <span>No background set</span>
+                            </div>
+                            <div class="bg-buttons">
+                                <label for="theme-upload" class="btn-upload-bg">
+                                    <i class="fas fa-upload"></i> Choose Image
+                                </label>
+                                <input type="file" id="theme-upload" accept="image/*" hidden>
+                                <button class="btn-remove-bg" id="btn-remove-bg">
+                                    <i class="fas fa-times"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- SAVE — Appearance -->
+                <div class="save-row">
+                    <button id="save-settings-btn" class="btn-save">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANEL: ACCOUNT -->
+            <div class="settings-panel" id="panel-account">
+                <div class="settings-grid" style="grid-template-columns: 1fr; max-width: 520px;">
+
+                    <!-- CARD: Account Info -->
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-id-badge"></i></div>
+                            <div>
+                                <h3>Account</h3>
+                                <p>Edit your details</p>
+                            </div>
+                        </div>
+                        <div class="account-section">
+
+                            <!-- Username -->
+                            <div class="account-row">
+                                <i class="fas fa-user"></i>
+                                <div class="account-field" style="flex:1;">
+                                    <small>Nickname</small>
+                                    <input type="text" id="acc-username" class="account-input" placeholder="Enter username">
+                                </div>
+                            </div>
+
+                            <!-- Email — read only -->
+                            <div class="account-row">
+                                <i class="fas fa-envelope"></i>
+                                <div class="account-field" style="flex:1;">
+                                    <small>Email</small>
+                                    <input type="email" id="acc-email" class="account-input" disabled>
+                                </div>
+                            </div>
+
+                            <!-- New Password -->
+                            <div class="account-row">
+                                <i class="fas fa-lock"></i>
+                                <div class="account-field" style="flex:1;">
+                                    <small>New Password</small>
+                                    <div class="password-toggle">
+                                        <input type="password" id="new-password" class="account-input" placeholder="Leave blank to keep current">
+                                        <i class="fas fa-eye toggle-eye" id="toggle-new-pass"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div class="account-row">
+                                <i class="fas fa-lock"></i>
+                                <div class="account-field" style="flex:1;">
+                                    <small>Confirm New Password</small>
+                                    <div class="password-toggle">
+                                        <input type="password" id="confirm-password" class="account-input" placeholder="Repeat new password">
+                                        <i class="fas fa-eye toggle-eye" id="toggle-confirm-pass"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- SAVE — Account -->
+                <div class="save-row">
+                    <button id="save-account-btn" class="btn-save">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script type="module" src="script/settings.js"></script>
+</body>
+</html>
